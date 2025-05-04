@@ -1,72 +1,78 @@
 <div class="card" *ngIf="student">
   <div class="card-body">
     <form [formGroup]="studentForm">
-      <div class="mb-3">
-        <label for="firstName">first name</label>
-        <input type="text" class="form-control" id="firstName" formControlName="firstName">
-        <ng-container *ngIf="studentForm.controls['firstName'].errors">
-          <div class="alert alert-danger" *ngIf="studentForm.controls['firstName'].errors['required']">
-            this field is required
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="firstName">first name</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+            <ng-container *ngIf="studentForm.controls['firstName'].errors">
+              <div class="alert alert-danger" *ngIf="studentForm.controls['firstName'].errors['required']">
+                this field is required
+              </div>
+              <div class="alert alert-danger" *ngIf="studentForm.controls['firstName'].errors['minlength']">
+                minimun length 2
+              </div>
+            </ng-container>
           </div>
-          <div class="alert alert-danger" *ngIf="studentForm.controls['firstName'].errors['minlength']">
-            minimun length 2
+          <div class="mb-3">
+            <label for="lastName">last name</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            <ng-container *ngIf="studentForm.controls['lastName'].errors">
+              <div class="alert alert-danger" *ngIf="studentForm.controls['lastName'].errors['required']">
+                this field is required
+              </div>
+            </ng-container>
           </div>
-        </ng-container>
-      </div>
-      <div class="mb-3">
-        <label for="lastName">last name</label>
-        <input type="text" class="form-control" id="lastName" formControlName="lastName">
-        <ng-container *ngIf="studentForm.controls['lastName'].errors">
-          <div class="alert alert-danger" *ngIf="studentForm.controls['lastName'].errors['required']">
-            this field is required
+          <div class="mb-3">
+            <label for="active">active</label>
+            <input type="text" class="form-control" id="active" formControlName="active">
           </div>
-        </ng-container>
-      </div>
-      <div class="mb-3">
-        <label for="address">address</label>
-        <input type="text" class="form-control" id="address" formControlName="address">
-      </div>
-      <div class="mb-3">
-        <label for="phone">phone</label>
-        <input type="text" class="form-control" id="phone" formControlName="phone">
-      </div>
-      <div class="mb-3">
-        <label for="avgMark">average mark</label>
-        <input type="number" class="form-control" id="avgMark" formControlName="avgMark">
-      </div>
-      <div class="mb-3">
-        <label for="active">active</label>
-        <input type="text" class="form-control" id="active" formControlName="active">
-      </div>
-      <div class="mb-3" *ngIf="!student.active">
-        <label for="dateLeave">date leave</label>
-        <input type="text" class="form-control" id="dateLeave" formControlName="dateLeave">
-      </div>
-      <div class="mb-3">
-        <label for="course">course</label>
-        <select class="form-control" formControlName="course">
-          <option *ngFor="let course of myCourses" value="{{course.id}}">{{course.name}}</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label for="year">year</label>
-        <br/>
-        <input type="radio" value="year.A" name="year" formControlName="year" />A
-        <br />
-        <input type="radio" value="year.B" name="year" formControlName="year" />B
-        <br />
-        <input type="radio" value="year.C" name="year" formControlName="year" />C
-        <br />
-      </div>
-      <div [ngSwitch]="studentForm.controls['year'].value">
-        <div *ngSwitchCase="'year.A'">
-          240 days of learning
+          <div class="mb-3" *ngIf="!student.active">
+            <label for="dateLeave">date leave</label>
+            <input type="text" class="form-control" id="dateLeave" formControlName="dateLeave">
+          </div>
+          <div class="mb-3">
+            <label for="avgMark">average mark</label>
+            <input type="number" class="form-control" id="avgMark" formControlName="avgMark">
+          </div>
         </div>
-        <div *ngSwitchCase="'year.B'">
-          200 days of learning
-        </div>
-        <div *ngSwitchCase="'year.C'">
-          40 days of learning
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="address">address</label>
+            <input type="text" class="form-control" id="address" formControlName="address">
+          </div>
+          <div class="mb-3">
+            <label for="phone">phone</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone">
+          </div>
+          <div class="mb-3">
+            <label for="course">course</label>
+            <select class="form-control" formControlName="course">
+              <option *ngFor="let course of myCourses" value="{{course.id}}">{{course.name}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="year">year</label>
+            <br />
+            <input type="radio" value="year.A" name="year" formControlName="year" />A
+            <br />
+            <input type="radio" value="year.B" name="year" formControlName="year" />B
+            <br />
+            <input type="radio" value="year.C" name="year" formControlName="year" />C
+            <br />
+          </div>
+          <div [ngSwitch]="studentForm.controls['year'].value">
+            <div *ngSwitchCase="'year.A'">
+              240 days of learning
+            </div>
+            <div *ngSwitchCase="'year.B'">
+              200 days of learning
+            </div>
+            <div *ngSwitchCase="'year.C'">
+              40 days of learning
+            </div>
+          </div>
         </div>
       </div>
 
