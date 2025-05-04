@@ -6,6 +6,7 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TestListComponent } from './test-list/test-list.component';
+import { StudentService } from './student.service';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TestListComponent } from './test-list/test-list.component';
     TestListComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+  providers: [StudentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

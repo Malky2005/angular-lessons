@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, output } from '@angular/core';
 import { Student } from '../models/student.model';
 import { Test } from '../models/test.model';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'student-list',
@@ -8,23 +9,12 @@ import { Test } from '../models/test.model';
   templateUrl: './student-list.component.html'
 })
 export class StudentListComponent {
-  students: Student[] = [
-    { id: 1, firstName: "aaa", lastName: "aaa", address: "lakjla", phone: "01-1234567", active: true, avgMark: 85,
-      tests:[
-        { id: 1, date: new Date(), description: "math", mark: 86 },
-        { id: 2, date: new Date(), description: "history", mark: 85 },
-        { id: 3, date: new Date(), description: "grammer", mark: 84 },
-      ]
-    },
-    { id: 2, firstName: "bbb", lastName: "bbb", address: "lakjla", phone: "01-1234567", active: false, avgMark: 88, dateLeave: new Date() },
-    { id: 3, firstName: "ccc", lastName: "ccc", address: "lakjla", phone: "01-1234567", active: true, avgMark: 96 ,
-      tests:[
-          { id: 1, date: new Date(), description: "math", mark: 95 },
-          { id: 2, date: new Date(), description: "history", mark: 93 },
-          { id: 3, date: new Date(), description: "grammer", mark: 100 },
-        ]
-    }
-  ]
+  constructor(private _studentService: StudentService) {}
+
+  students: Student[] = [];
+  ngOnInit(): void {
+    this.students = this._studentService.getStudents();
+  }
   selectedStudent?: Student
   delete(student: Student) {
     let index = this.students.indexOf(student)
