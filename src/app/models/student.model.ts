@@ -1,4 +1,5 @@
 import { Course } from "./course.model";
+import { Test } from "./test.model";
 
 export class Student {
     id: number;
@@ -11,6 +12,7 @@ export class Student {
     dateLeave?: Date;
     course?:Course;
     year?:Year;
+    tests?: Test[];
 
     /**
      *

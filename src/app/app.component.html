@@ -1,5 +1,12 @@
 <div class="container">
     <h4>{{good()}}</h4>
     <h1>{{title}}</h1>
-    <student-list></student-list>
+    <div class="row">
+        <div [class.col-12]="!testsOfClickedStudent" [class.col-9]="testsOfClickedStudent">
+            <student-list (clickStudent)="clickStudent($event)"></student-list>
+        </div>
+        <div class="col-3">
+            <test-list [tests]="testsOfClickedStudent"></test-list>
+        </div>
+    </div>
 </div>

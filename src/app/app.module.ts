@@ -5,12 +5,14 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TestListComponent } from './test-list/test-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentListComponent,
-    StudentDetailsComponent
+    StudentDetailsComponent,
+    TestListComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   bootstrap: [AppComponent]

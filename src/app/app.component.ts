@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Student } from './models/student.model';
+import { Test } from './models/test.model';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +15,10 @@ export class AppComponent {
     if (hour > 12 && hour <= 18) { return "good afternoon"; }
     else { return "good night"; }
   }
+
+  testsOfClickedStudent?:Test[]
+  clickStudent(clickedStudent: Student){
+    this.testsOfClickedStudent=clickedStudent.tests
+  }
+  
 }
