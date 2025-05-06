@@ -6,7 +6,7 @@
             <student-list (clickStudent)="clickStudent($event)"></student-list>
         </div>
         <div class="col-3">
-            <test-list [tests]="testsOfClickedStudent"></test-list>
+            <test-list [tests]="testsOfClickedStudent" [id]="idOfClickedStudent"></test-list>
         </div>
     </div>
 </div>

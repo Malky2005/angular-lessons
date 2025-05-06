@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Student } from './models/student.model';
 import { Test } from './models/test.model';
 
@@ -16,9 +16,10 @@ export class AppComponent {
     else { return "good night"; }
   }
 
-  testsOfClickedStudent?:Test[]
-  clickStudent(clickedStudent: Student){
-    this.testsOfClickedStudent=clickedStudent.tests
+  testsOfClickedStudent?: Test[]
+  idOfClickedStudent:number = 0
+  clickStudent(clickedStudent: Student) {
+    this.testsOfClickedStudent = clickedStudent.tests;
+    this.idOfClickedStudent = clickedStudent.id;
   }
-  
 }

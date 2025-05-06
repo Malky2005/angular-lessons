@@ -3,6 +3,8 @@ import { Student, Year } from '../models/student.model';
 import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 import { first } from 'rxjs';
 import { Course, courseList } from '../models/course.model';
+import { AbsenceDays } from '../models/absenceDays.model';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'student-details',
@@ -13,6 +15,8 @@ export class StudentDetailsComponent {
   myCourses: Course[] = courseList;
   year = Year
   private _student?: Student
+  constructor(public _studentService: StudentService) { }
+  
   public get student(): Student | undefined {
     return this._student
   }
@@ -30,18 +34,31 @@ export class StudentDetailsComponent {
         active: new FormControl(this._student.active),
         dateLeave: new FormControl(this._student.dateLeave),
         course: new FormControl(this._student.course),
-        year: new FormControl(this._student.year)
+        year: new FormControl(this._student.year),
       })
+
     }
   }
 
   studentForm: FormGroup = new FormGroup({})
 
+  missingFromDate?: Date;
+  missingDays?: number;
+
   @Output()
   onSave: EventEmitter<Student> = new EventEmitter();
 
   save() {
-    this.student = this.studentForm.value
-    this.onSave.emit(this.student)
+    this.studentForm.value.tests = this.student?.tests;
+    this.studentForm.value.absenceDays = this.student?.absenceDays;
+    this.student = this.studentForm.value;
+    if (this.missingDays && this.missingDays > 0 && this.student)
+      this.student.absenceDays.push({
+        fromDate: this.missingFromDate, totalDays:
+          this.missingDays
+      });
+    this.missingDays = undefined;
+    this.missingFromDate = undefined;
+    this.onSave.emit(this.student);
   }
 }

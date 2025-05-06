@@ -1,6 +1,6 @@
 export class Test{
-    id?: Number;
+    id?: number;
     date?: Date;
     description?: string
-    mark?: Number
+    mark?: number
 }

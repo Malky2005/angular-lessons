@@ -9,11 +9,13 @@ import { StudentService } from '../student.service';
   templateUrl: './student-list.component.html'
 })
 export class StudentListComponent {
-  constructor(private _studentService: StudentService) {}
+  constructor(public _studentService: StudentService) {}
 
   students: Student[] = [];
   ngOnInit(): void {
-    this.students = this._studentService.getStudents();
+    this._studentService.getStudentsPromise().then((students)=>{
+      this.students = students;
+    });
   }
   selectedStudent?: Student
   delete(student: Student) {

@@ -1,3 +1,4 @@
+import { AbsenceDays } from "./absenceDays.model";
 import { Course } from "./course.model";
 import { Test } from "./test.model";
 
@@ -13,6 +14,7 @@ export class Student {
     course?:Course;
     year?:Year;
     tests?: Test[];
+    absenceDays: AbsenceDays[] = [];
 
     /**
      *

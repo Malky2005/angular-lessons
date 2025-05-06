@@ -1,10 +1,13 @@
-<ul class="list-group" *ngIf="tests">
-    <li class="list-group-item" *ngFor="let test of tests">
-        <div class="row">
-            <div class="col-2">{{test.id}}</div>
-            <div class="col-3">{{test.description}}</div>
-            <div class="col-2">{{test.mark}}</div>
-            <div class="col-2">{{test.date}}</div>
-        </div>
-    </li>
-</ul>
+<ng-container *ngIf="tests">
+    <h6>average mark: {{avgMark}}</h6>
+    <ul class="list-group" >
+        <li class="list-group-item" *ngFor="let test of tests">
+            <div class="row">
+                <div class="col-2">{{test.id}}</div>
+                <div class="col-3">{{test.description}}</div>
+                <div class="col-2">{{test.mark}}</div>
+                <div class="col-2">{{test.date}}</div>
+            </div>
+        </li>
+    </ul>
+</ng-container>

@@ -55,11 +55,11 @@
           <div class="mb-3">
             <label for="year">year</label>
             <br />
-            <input type="radio" value="year.A" name="year" formControlName="year" />A
+            <input class="form-check-input" type="radio" value="year.A" name="year" formControlName="year" />A
             <br />
-            <input type="radio" value="year.B" name="year" formControlName="year" />B
+            <input class="form-check-input" type="radio" value="year.B" name="year" formControlName="year" />B
             <br />
-            <input type="radio" value="year.C" name="year" formControlName="year" />C
+            <input class="form-check-input" type="radio" value="year.C" name="year" formControlName="year" />C
             <br />
           </div>
           <div [ngSwitch]="studentForm.controls['year'].value">
@@ -75,9 +75,26 @@
           </div>
         </div>
       </div>
-
+    </form>
+      <div style="background-color: lightgray; padding: 5px;">
+        total days missing: {{_studentService.getTotalMissingDays(student.id)}}
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="missingfromDate">missing from Date</label>
+            <input class="form-control" type="date" [(ngModel)]="missingFromDate">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="missingDays">missing Days:</label>
+            <input class="form-control" type="number" [(ngModel)]="missingDays">
+          </div>
+        </div>
+      </div>
 
       <button class="btn btn-primary" (click)="save()" [disabled]="studentForm.invalid">save</button>
-    </form>
+    
   </div>
 </div>
