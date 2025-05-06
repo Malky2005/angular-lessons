@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, output } from '@angular/core';
 import { Student } from '../models/student.model';
 import { Test } from '../models/test.model';
 import { StudentService } from '../student.service';
@@ -8,7 +8,7 @@ import { StudentService } from '../student.service';
   standalone: false,
   templateUrl: './student-list.component.html'
 })
-export class StudentListComponent {
+export class StudentListComponent implements OnInit{
   constructor(public _studentService: StudentService) {}
 
   students: Student[] = [];

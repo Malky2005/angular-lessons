@@ -7,13 +7,15 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TestListComponent } from './test-list/test-list.component';
 import { StudentService } from './student.service';
+import { ObservableExComponent } from './observable-ex/observable-ex.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentListComponent,
     StudentDetailsComponent,
-    TestListComponent
+    TestListComponent,
+    ObservableExComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [StudentService],
