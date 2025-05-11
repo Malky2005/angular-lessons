@@ -8,19 +8,42 @@ import { StudentService } from '../student.service';
   standalone: false,
   templateUrl: './student-list.component.html'
 })
-export class StudentListComponent implements OnInit{
-  constructor(public _studentService: StudentService) {}
+export class StudentListComponent implements OnInit {
+  constructor(public _studentService: StudentService) { }
 
   students: Student[] = [];
+  showActive: boolean = true;
   ngOnInit(): void {
-    this._studentService.getStudentsPromise().then((students)=>{
-      this.students = students;
-    });
+    // this._studentService.getStudentsFromServerByDone(this.showActive).subscribe(
+    //   (students: Student[]) => {
+    //     this.students = students;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // )
+    this._studentService.getStudentsFromServer().subscribe(
+      (students: Student[]) => {
+        this.students = students;
+      },
+      (error) => {
+        console.log(error);
+      });
   }
   selectedStudent?: Student
   delete(student: Student) {
-    let index = this.students.indexOf(student)
-    this.students.splice(index, 1)
+    this._studentService.deleteStudent(student).subscribe(
+      (isDeleted: boolean) => {
+        if (isDeleted) {
+          let index = this.students.indexOf(student)
+          this.students.splice(index, 1)
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
   }
 
   update(student: Student) {
@@ -32,16 +55,25 @@ export class StudentListComponent implements OnInit{
   }
 
   saveStudentDetails(studentToSave: Student) {
-    if (studentToSave.id === 0){
-      studentToSave.id = this.students[this.students.length-1].id + 1
-      this.students.push(studentToSave)
+    if (studentToSave.id === 0) {
+      this._studentService.addStudent(studentToSave).subscribe(
+        (student: Student) => {
+          this.students.push(student);
+        }
+        , (error) => {
+          console.log(error);
+        })
     }
-    else{
-      let studentToUpdate = this.students.find(student => student.id === studentToSave.id)
-      if(studentToUpdate){
-        let index = this.students.indexOf(studentToUpdate)
-        this.students[index] = studentToSave
-      }
+    else {
+      this._studentService.updateStudent(studentToSave).subscribe(
+        (student: Student) => {
+          let index = this.students.indexOf(studentToSave)
+          this.students[index] = student;
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
     }
     this.selectedStudent = undefined;
     alert('the student updated succesfuly!')
@@ -50,7 +82,7 @@ export class StudentListComponent implements OnInit{
   @Output()
   clickStudent: EventEmitter<Student> = new EventEmitter()
 
-  OnClickStudent(clickedStudent: Student){
+  OnClickStudent(clickedStudent: Student) {
     this.clickStudent.emit(clickedStudent)
   }
 }

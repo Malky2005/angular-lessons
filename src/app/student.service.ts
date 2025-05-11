@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Student } from "./models/student.model";
 import { Test } from "./models/test.model";
-import { timeout } from "rxjs";
+import { Observable, timeout } from "rxjs";
 import { AbsenceDays } from "./models/absenceDays.model";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class StudentService {
+    constructor(private http: HttpClient){}
     readonly studentList: Student[] = [
         {
             id: 1, firstName: "aaa", lastName: "aaa", address: "lakjla", phone: "01-1234567", active: true, avgMark: 85, absenceDays: [],
@@ -33,6 +35,25 @@ export class StudentService {
         return new Promise<Student[]>((resolve, reject) => {
             setTimeout(() => { resolve(this.studentList); }, 3000)
         })
+    }
+
+    getStudentsFromServer():Observable<Student[]>{
+        return this.http.get<Student[]>("api/students"); 
+    }
+    getStudentsFromServerByDone(done: boolean):Observable<Student[]>{
+        return this.http.get<Student[]>("api/students/"+done); 
+    }
+
+    addStudent(student: Student): Observable<Student> {
+        return this.http.post<Student>("api/students", student);
+    }
+
+    updateStudent(student: Student): Observable<Student> {
+        return this.http.put<Student>("api/students/"+student.id, student);
+    }
+
+    deleteStudent(student: Student): Observable<boolean> {
+        return this.http.delete<boolean>("api/students/" + student.id);
     }
 
     async getAvg(id: number): Promise<number> {

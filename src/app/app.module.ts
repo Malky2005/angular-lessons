@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { TestListComponent } from './test-list/test-list.component';
 import { StudentService } from './student.service';
 import { ObservableExComponent } from './observable-ex/observable-ex.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { ObservableExComponent } from './observable-ex/observable-ex.component';
     TestListComponent,
     ObservableExComponent
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [StudentService],
   bootstrap: [AppComponent]
 })

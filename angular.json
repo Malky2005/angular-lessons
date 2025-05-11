@@ -75,7 +75,8 @@
               "buildTarget": "my-app2:build:production"
             },
             "development": {
-              "buildTarget": "my-app2:build:development"
+              "buildTarget": "my-app2:build:development",
+              "proxyConfig": "src/proxy.config.json"
             }
           },
           "defaultConfiguration": "development"

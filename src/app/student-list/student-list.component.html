@@ -1,3 +1,5 @@
+<input type="checkbox" [(ngModel)]="showActive" /> Show only active students
+<br/>
 <ul class="list-group">
     <li *ngFor="let student of students" class="list-group-item" (click)="OnClickStudent(student)"
     [ngClass]="{'list-group-item-danger': !student.active,
